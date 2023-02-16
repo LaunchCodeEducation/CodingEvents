@@ -10,30 +10,27 @@ namespace CodingEvents.Controllers
 {
     public class EventsController : Controller
     {
-        static private List<string> Events = new List<string>();
+        static private Dictionary<string, string> Events = new Dictionary<string, string>();
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-
             ViewBag.events = Events;
 
             return View();
         }
 
-        [HttpGet]
         public IActionResult Add()
         {
-            // Any additional method code here
-
             return View();
         }
 
         [HttpPost]
-        [Route("/Events/Add")]
-        public IActionResult NewEvent(string name)
+        [Route("Events/Add")]
+        public IActionResult NewEvent(string name, string desc = "")
         {
-            Events.Add(name);
+            Events.Add(name, desc);
+
 
             return Redirect("/Events");
         }
