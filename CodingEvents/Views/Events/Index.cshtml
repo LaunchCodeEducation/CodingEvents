@@ -18,25 +18,30 @@
 }
 else
 {
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Contact Email
+        </th>
+    </tr>
+
+    @foreach (var evt in Model)
+    {
         <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
+            <td>@evt.Id</td>
+            <td>@evt.Name</td>
+            <td>@evt.Description</td>
+            <td>@evt.ContactEmail</td>
         </tr>
-        @foreach (var evt in Model)
-        {
-            <tr>
-                <td>@evt.Id</td>
-                <td>@evt.Name</td>
-                <td>@evt.Description</td>
-            </tr>
-        }
-    </table>
+    }
+</table>
 }
