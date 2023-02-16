@@ -16,9 +16,9 @@ namespace CodingEvents.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            ViewBag.events = EventData.GetAll();
+            List<Event> events = new List<Event>(EventData.GetAll());
 
-            return View();
+            return View(events);
         }
 
         public IActionResult Add()
@@ -31,7 +31,6 @@ namespace CodingEvents.Controllers
         public IActionResult NewEvent(Event newEvent)
         {
             EventData.Add(newEvent);
-
 
             return Redirect("/Events");
         }
