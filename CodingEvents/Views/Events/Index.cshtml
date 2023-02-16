@@ -8,6 +8,7 @@
     <a asp-controller="Events" asp-action="Add">Add Event</a>
 </p>
 
+
 <p>
     <a asp-controller="Events" asp-action="Delete">Delete Event</a>
 </p>
@@ -18,30 +19,33 @@
 }
 else
 {
-<table class="table">
-    <tr>
-        <th>
-            Id
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Contact Email
-        </th>
-    </tr>
-
-    @foreach (var evt in Model)
-    {
+    <table class="table">
         <tr>
-            <td>@evt.Id</td>
-            <td>@evt.Name</td>
-            <td>@evt.Description</td>
-            <td>@evt.ContactEmail</td>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Contact Email
+            </th>
+            <th>
+                Event Type
+            </th>
         </tr>
-    }
-</table>
+        @foreach (var evt in Model)
+        {
+            <tr>
+                <td>@evt.Id</td>
+                <td>@evt.Name</td>
+                <td>@evt.Description</td>
+                <td>@evt.ContactEmail</td>
+                <td>@evt.Type</td>
+            </tr>
+        }
+    </table>
 }
