@@ -1,6 +1,7 @@
 ﻿using System;
 using CodingEvents.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace CodingEvents.Data
 {
@@ -12,6 +13,13 @@ namespace CodingEvents.Data
 
         public EventDbContext(DbContextOptions<EventDbContext> options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Event>()
+                .HasOne(p => p.Category)
+                .WithMany(b => b.events);
         }
     }
 }
