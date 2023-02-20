@@ -15,6 +15,8 @@ namespace CodingEvents.Models
 
         public int Id { get; set; }
 
+        public ICollection<Tag> Tags { get; set; }
+
         public Event(string name, string description, string contactEmail)
         {
             Name = name;

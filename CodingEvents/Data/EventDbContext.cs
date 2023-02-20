@@ -22,6 +22,11 @@ namespace CodingEvents.Data
             modelBuilder.Entity<Event>()
                 .HasOne(p => p.Category)
                 .WithMany(b => b.events);
+
+            modelBuilder.Entity<Event>()
+                .HasMany(p => p.Tags)
+                .WithMany(p => p.Events)
+                .UsingEntity(j => j.ToTable("EventTags"));
         }
     }
 }
