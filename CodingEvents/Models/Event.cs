@@ -22,6 +22,7 @@ namespace CodingEvents.Models
             Name = name;
             Description = description;
             ContactEmail = contactEmail;
+            Tags = new List<Tag>();
         }
 
         public Event()

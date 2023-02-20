@@ -65,10 +65,11 @@ namespace CodingEvents.Controllers
                 int eventId = viewModel.EventId;
                 int tagId = viewModel.TagId;
 
-                Event theEvent = context.Events.Find(eventId);
-                Tag theTag = context.Tags.Find(tagId);
+                Event theEvent = context.Events.Where(e => e.Id == eventId).First();
+                Tag theTag = context.Tags.Where(t => t.Id == tagId).First();
 
                 theEvent.Tags.Add(theTag);
+                theTag.Events.Add(theEvent);
 
                 context.SaveChanges();
 
