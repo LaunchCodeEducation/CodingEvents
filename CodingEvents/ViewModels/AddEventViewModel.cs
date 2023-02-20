@@ -21,7 +21,7 @@ namespace CodingEvents.ViewModels
         [Required(ErrorMessage = "Category is required")]
         public int CategoryId { get; set; }
 
-        public List<SelectListItem> Categories { get; set; }
+        public List<SelectListItem>? Categories { get; set; }
 
         public AddEventViewModel(List<EventCategory> categories)
         {
