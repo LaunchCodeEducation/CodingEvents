@@ -6,6 +6,7 @@ using CodingEvents.Data;
 using CodingEvents.Models;
 using CodingEvents.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -65,11 +66,10 @@ namespace CodingEvents.Controllers
                 int eventId = viewModel.EventId;
                 int tagId = viewModel.TagId;
 
-                Event theEvent = context.Events.Where(e => e.Id == eventId).First();
+                Event theEvent = context.Events.Include(p => p.Tags).Where(e => e.Id == eventId).First();
                 Tag theTag = context.Tags.Where(t => t.Id == tagId).First();
 
                 theEvent.Tags.Add(theTag);
-                theTag.Events.Add(theEvent);
 
                 context.SaveChanges();
 
