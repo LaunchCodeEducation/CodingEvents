@@ -11,7 +11,7 @@ namespace CodingEvents.Models
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 characters")]
         public string Name { get; set; }
 
-        public ICollection<Event> Events { get; set; }
+        public ICollection<Event>? Events { get; set; }
 
         public Tag(string name)
         {
