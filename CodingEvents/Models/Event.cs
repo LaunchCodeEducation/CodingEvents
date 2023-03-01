@@ -3,8 +3,8 @@ namespace CodingEvents.Models
 {
 	public class Event
 	{
-		public string Name { get; set; }
-		public string Description { get; set; }
+		public string? Name { get; set; }
+		public string? Description { get; set; }
 
 		public int Id { get; set; }
 		static private int nextId = 1;
@@ -23,7 +23,7 @@ namespace CodingEvents.Models
 			nextId++;
 		}
 
-        public override string ToString()
+        public override string? ToString()
         {
             return Name;
         }
@@ -40,3 +40,4 @@ namespace CodingEvents.Models
     }
 }
 
+//added null op.
