@@ -17,6 +17,3 @@ namespace CodingEvents.ViewModels
 		public string? ContactEmail { get; set; }
 	}
 }
-
-
-//added nullable operators

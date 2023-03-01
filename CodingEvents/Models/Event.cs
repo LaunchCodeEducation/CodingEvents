@@ -41,5 +41,3 @@ namespace CodingEvents.Models
         }
     }
 }
-
-//added null op.
