@@ -1,10 +1,22 @@
-﻿using CodingEvents.Data;
+using CodingEvents.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+builder.Services.AddDefaultIdentity<IdentityUser>
+(options =>
+{
+   options.SignIn.RequireConfirmedAccount = true;
+   options.Password.RequireDigit = false;
+   options.Password.RequiredLength = 10;
+   options.Password.RequireNonAlphanumeric = false;
+   options.Password.RequireUppercase = true;
+   options.Password.RequireLowercase = false;
+}).AddEntityFrameworkStores<EventDbContext>();
 
 //--- MySql connection
 
@@ -33,8 +45,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",
