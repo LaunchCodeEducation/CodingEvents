@@ -1,11 +1,11 @@
-﻿using System;
-using CodingEvents.Models;
+﻿using CodingEvents.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CodingEvents.Data
 {
-    public class EventDbContext : DbContext
+    public class EventDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public DbSet<Event> Events { get; set; }
 
@@ -27,6 +27,7 @@ namespace CodingEvents.Data
                 .HasMany(p => p.Tags)
                 .WithMany(p => p.Events)
                 .UsingEntity(j => j.ToTable("EventTags"));
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
