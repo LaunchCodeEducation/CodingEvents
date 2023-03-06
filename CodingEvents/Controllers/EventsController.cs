@@ -30,7 +30,6 @@ namespace CodingEvents.Controllers
         }
 
         [HttpPost]
-        [Route("/Events/Add")]
         public IActionResult Add(AddEventViewModel addEventViewModel)
         {
             if (ModelState.IsValid)
