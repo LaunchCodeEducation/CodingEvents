@@ -20,12 +20,12 @@ namespace CodingEvents.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>()
-                .HasOne(p => p.Category)
-                .WithMany(b => b.events);
+                .HasOne(c => c.Category)
+                .WithMany(e => e.events);
 
             modelBuilder.Entity<Event>()
-                .HasMany(p => p.Tags)
-                .WithMany(p => p.Events)
+                .HasMany(t => t.Tags)
+                .WithMany(t => t.Events)
                 .UsingEntity(j => j.ToTable("EventTags"));
         }
     }
