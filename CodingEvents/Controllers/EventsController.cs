@@ -79,6 +79,16 @@ namespace CodingEvents.Controllers
 
             return Redirect("/Events");
         }
+
+        public IActionResult Detail(int id)
+        {
+        Event theEvent = context.Events
+            .Include(e => e.Category)
+            .Single(e => e.Id == id);
+
+        EventDetailViewModel viewModel = new EventDetailViewModel(theEvent);
+        return View(viewModel);
+        }
     }
 }
 
