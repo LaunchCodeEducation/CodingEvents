@@ -48,7 +48,6 @@ namespace CodingEvents.Controllers
             return View("Add", tag);
         }
 
-        // responds to URLs like /Tag/AddEvent/5 (where 5 is an event ID)
         public IActionResult AddEvent(int id)
         {
             Event theEvent = context.Events.Find(id);
@@ -59,6 +58,9 @@ namespace CodingEvents.Controllers
             return View(viewModel);
         }
 
+        // responds to URLs like /Tag/AddEvent/5 (where 5 is an event ID)
+
+        [HttpPost]
         public IActionResult AddEvent(AddEventTagViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -67,7 +69,7 @@ namespace CodingEvents.Controllers
                 int eventId = viewModel.EventId;
                 int tagId = viewModel.TagId;
 
-                Event theEvent = context.Events.Include(e => e.Tags).Where(e => e.Id == eventId).First();
+                Event theEvent = context.Events.Include(e => e.Tags).Where(t => t.Id == eventId).First();
                 Tag theTag = context.Tags.Where(t => t.Id == tagId).First();
 
                 theEvent.Tags.Add(theTag);
