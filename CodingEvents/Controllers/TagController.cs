@@ -59,15 +59,15 @@ namespace CodingEvents.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
         public IActionResult AddEvent(AddEventTagViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+
                 int eventId = viewModel.EventId;
                 int tagId = viewModel.TagId;
 
-                Event theEvent = context.Events.Include(p => p.Tags).Where(e => e.Id == eventId).First();
+                Event theEvent = context.Events.Include(e => e.Tags).Where(e => e.Id == eventId).First();
                 Tag theTag = context.Tags.Where(t => t.Id == tagId).First();
 
                 theEvent.Tags.Add(theTag);
@@ -75,9 +75,18 @@ namespace CodingEvents.Controllers
                 context.SaveChanges();
 
                 return Redirect("/Events/Detail/" + eventId);
-            }
 
-            return View(viewModel);
+            } 
+
+        return View(viewModel);
+
+        }
+
+        public IActionResult Detail(int id) 
+        {
+            Tag theTag = context.Tags.Include(e => e.Events).Where(t => t.Id == id).First();
+
+            return View(theTag);
         }
 
     }
