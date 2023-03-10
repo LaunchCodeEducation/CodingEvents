@@ -7,6 +7,7 @@ using CodingEvents.Models;
 using CodingEvents.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,5 +47,39 @@ namespace CodingEvents.Controllers
 
             return View("Add", tag);
         }
+
+        // responds to URLs like /Tag/AddEvent/5 (where 5 is an event ID)
+        public IActionResult AddEvent(int id)
+        {
+            Event theEvent = context.Events.Find(id);
+            List<Tag> possibleTags = context.Tags.ToList();
+
+            AddEventTagViewModel viewModel = new AddEventTagViewModel(theEvent, possibleTags);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddEvent(AddEventTagViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int eventId = viewModel.EventId;
+                int tagId = viewModel.TagId;
+
+                Event theEvent = context.Events.Include(p => p.Tags).Where(e => e.Id == eventId).First();
+                Tag theTag = context.Tags.Where(t => t.Id == tagId).First();
+
+                theEvent.Tags.Add(theTag);
+
+                context.SaveChanges();
+
+                return Redirect("/Events/Detail/" + eventId);
+            }
+
+            return View(viewModel);
+        }
+
     }
+
 }
