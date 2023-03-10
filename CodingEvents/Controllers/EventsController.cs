@@ -84,6 +84,7 @@ namespace CodingEvents.Controllers
         {
         Event theEvent = context.Events
             .Include(e => e.Category)
+            .Include(e => e.Tags)
             .Single(e => e.Id == id);
 
         EventDetailViewModel viewModel = new EventDetailViewModel(theEvent);
