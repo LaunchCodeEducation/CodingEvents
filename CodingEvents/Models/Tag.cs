@@ -14,7 +14,6 @@ namespace CodingEvents.Models
         public Tag(string name)
         {
             Name = name;
-            Events = new List<Event>();
         }
 
         public Tag()
